@@ -1,0 +1,300 @@
+﻿<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+<title>管理员后台管理系统</title>
+  <link rel="icon" th:href="@{../images/nothing.ico}" type="image/x-ico">
+  <link th:href="@{../css/bootstrap.min.css}" rel="stylesheet">
+  <link th:href="@{../css/materialdesignicons.min.css}" rel="stylesheet">
+  <link th:href="@{../css/style.css}" rel="stylesheet">
+</head>
+  
+<body data-logobg="color_8" data-sidebarbg="color_8">
+<div class="layout-web">
+  <div class="layout-container">
+    <!--左侧导航-->
+    <aside class="layout-sidebar">
+
+      <!-- logo -->
+      <div id="logo" class="sidebar-header">
+        <a th:href="@{/manager/index.html}"><img src="../images/logo-sidebar.png" title="" alt="" /></a>
+      </div>
+      <div class="layout-sidebar-scroll">
+
+        <nav class="sidebar-main">
+          <ul class="nav nav-drawer">
+            <li class="nav-item "> <a th:href="@{/manager/index.html}"><i class="mdi mdi-home"></i> 后台首页</a> </li>
+            <li class="nav-item "> <a th:href="@{/manager/staff.html}"><i class="mdi mdi-nature-people"></i> 员工管理</a> </li>
+            <li class="nav-item active"> <a th:href="@{/manager/repairs.html}"><i class="mdi mdi-phone-hangup"></i> 报修管理</a> </li>
+            <li class="nav-item "> <a th:href="@{/manager/complaint.html}"><i class="mdi mdi-hangouts"></i> 建议、投诉</a> </li>
+            <li class="nav-item "> <a th:href="@{/manager/notice.html}"><i class="mdi mdi-tab"></i> 公告发布</a> </li>
+            <li class="nav-item nav-item-has-subnav">
+              <a href="javascript:void(0)"><i class="mdi mdi-sync-alert"></i> 租赁</a>
+              <ul class="nav nav-drawer nav-subnav">
+                <li class="nav-item "> <a th:href="@{/manager/notrent.html}">未租</a> </li>
+                <li class="nav-item "> <a th:href="@{/manager/rent.html}">已租</a> </li>
+              </ul>
+            </li>
+            <li class="nav-item "> <a th:href="@{/manager/visitor.html}"><i class="mdi mdi-account"></i> 访客记录</a> </li>
+            <li class="nav-item "> <a th:href="@{/manager/shop.html}"><i class="mdi mdi-satellite"></i> 商铺管理</a> </li>
+            <li class="nav-item "> <a th:href="@{/manager/stall.html}"><i class="mdi mdi-car"></i> 车位管理</a> </li>
+            <li class="nav-item "> <a th:href="@{/manager/cost.html}"><i class="mdi mdi-sale"></i> 费用记录</a> </li>
+            <li class="nav-item "> <a th:href="@{/manager/expire.html}"><i class="mdi mdi-alarm-plus"></i> 到期预警</a> </li>
+            <li class="nav-item "> <a th:href="@{/manager/log.html}"><i class="mdi mdi-looks"></i> 操作日志</a> </li>
+          </ul>
+        </nav>
+      </div>
+
+    </aside>
+    <!--End 左侧导航-->
+    
+    <!--头部信息-->
+    <header class="layout-header">
+      
+      <nav class="navbar navbar-default">
+        <div class="topbar">
+          
+          <div class="topbar-left">
+            <div class="aside-toggler">
+              <span class="toggler-bar"></span>
+              <span class="toggler-bar"></span>
+              <span class="toggler-bar"></span>
+            </div>
+            <span class="navbar-page-title">报修处理</span>
+          </div>
+          
+          <ul class="topbar-right">
+            <li class="dropdown dropdown-profile">
+              <a href="javascript:void(0)" data-toggle="dropdown">
+                <img class="img-avatar img-avatar-48 m-r-10" src="../images/users/avatar.jpg" alt="管理员" />
+                <span th:text="${session.loginUser.managerName}"><span class="caret"></span></span>
+              </a>
+              <ul class="dropdown-menu dropdown-menu-right">
+                <li> <a th:href="@{/manager/modify}"><i class="mdi mdi-account"></i> 个人信息</a> </li>
+                <li class="divider"></li>
+                <li> <a th:href="@{/logout}"><i class="mdi mdi-logout-variant"></i> 退出登录</a> </li>
+              </ul>
+            </li>
+            <!--切换主题配色-->
+		    <li class="dropdown dropdown-skin">
+			  <span data-toggle="dropdown" class="icon-palette"><i class="mdi mdi-palette"></i></span>
+			  <ul class="dropdown-menu dropdown-menu-right" data-stopPropagation="true">
+                <li class="drop-title"><p>主题</p></li>
+                <li class="drop-skin-li clearfix">
+                  <span class="inverse">
+                    <input type="radio" name="site_theme" value="default" id="site_theme_1" checked>
+                    <label for="site_theme_1"></label>
+                  </span>
+                  <span>
+                    <input type="radio" name="site_theme" value="dark" id="site_theme_2">
+                    <label for="site_theme_2"></label>
+                  </span>
+                  <span>
+                    <input type="radio" name="site_theme" value="translucent" id="site_theme_3">
+                    <label for="site_theme_3"></label>
+                  </span>
+                </li>
+			    <li class="drop-title"><p>LOGO</p></li>
+				<li class="drop-skin-li clearfix">
+                  <span class="inverse">
+                    <input type="radio" name="logo_bg" value="default" id="logo_bg_1" checked>
+                    <label for="logo_bg_1"></label>
+                  </span>
+                  <span>
+                    <input type="radio" name="logo_bg" value="color_2" id="logo_bg_2">
+                    <label for="logo_bg_2"></label>
+                  </span>
+                  <span>
+                    <input type="radio" name="logo_bg" value="color_3" id="logo_bg_3">
+                    <label for="logo_bg_3"></label>
+                  </span>
+                  <span>
+                    <input type="radio" name="logo_bg" value="color_4" id="logo_bg_4">
+                    <label for="logo_bg_4"></label>
+                  </span>
+                  <span>
+                    <input type="radio" name="logo_bg" value="color_5" id="logo_bg_5">
+                    <label for="logo_bg_5"></label>
+                  </span>
+                  <span>
+                    <input type="radio" name="logo_bg" value="color_6" id="logo_bg_6">
+                    <label for="logo_bg_6"></label>
+                  </span>
+                  <span>
+                    <input type="radio" name="logo_bg" value="color_7" id="logo_bg_7">
+                    <label for="logo_bg_7"></label>
+                  </span>
+                  <span>
+                    <input type="radio" name="logo_bg" value="color_8" id="logo_bg_8">
+                    <label for="logo_bg_8"></label>
+                  </span>
+				</li>
+				<li class="drop-title"><p>头部</p></li>
+				<li class="drop-skin-li clearfix">
+                  <span class="inverse">
+                    <input type="radio" name="header_bg" value="default" id="header_bg_1" checked>
+                    <label for="header_bg_1"></label>                      
+                  </span>                                                    
+                  <span>                                                     
+                    <input type="radio" name="header_bg" value="color_2" id="header_bg_2">
+                    <label for="header_bg_2"></label>                      
+                  </span>                                                    
+                  <span>                                                     
+                    <input type="radio" name="header_bg" value="color_3" id="header_bg_3">
+                    <label for="header_bg_3"></label>
+                  </span>
+                  <span>
+                    <input type="radio" name="header_bg" value="color_4" id="header_bg_4">
+                    <label for="header_bg_4"></label>                      
+                  </span>                                                    
+                  <span>                                                     
+                    <input type="radio" name="header_bg" value="color_5" id="header_bg_5">
+                    <label for="header_bg_5"></label>                      
+                  </span>                                                    
+                  <span>                                                     
+                    <input type="radio" name="header_bg" value="color_6" id="header_bg_6">
+                    <label for="header_bg_6"></label>                      
+                  </span>                                                    
+                  <span>                                                     
+                    <input type="radio" name="header_bg" value="color_7" id="header_bg_7">
+                    <label for="header_bg_7"></label>
+                  </span>
+                  <span>
+                    <input type="radio" name="header_bg" value="color_8" id="header_bg_8">
+                    <label for="header_bg_8"></label>
+                  </span>
+				</li>
+				<li class="drop-title"><p>侧边栏</p></li>
+				<li class="drop-skin-li clearfix">
+                  <span class="inverse">
+                    <input type="radio" name="sidebar_bg" value="default" id="sidebar_bg_1" checked>
+                    <label for="sidebar_bg_1"></label>
+                  </span>
+                  <span>
+                    <input type="radio" name="sidebar_bg" value="color_2" id="sidebar_bg_2">
+                    <label for="sidebar_bg_2"></label>
+                  </span>
+                  <span>
+                    <input type="radio" name="sidebar_bg" value="color_3" id="sidebar_bg_3">
+                    <label for="sidebar_bg_3"></label>
+                  </span>
+                  <span>
+                    <input type="radio" name="sidebar_bg" value="color_4" id="sidebar_bg_4">
+                    <label for="sidebar_bg_4"></label>
+                  </span>
+                  <span>
+                    <input type="radio" name="sidebar_bg" value="color_5" id="sidebar_bg_5">
+                    <label for="sidebar_bg_5"></label>
+                  </span>
+                  <span>
+                    <input type="radio" name="sidebar_bg" value="color_6" id="sidebar_bg_6">
+                    <label for="sidebar_bg_6"></label>
+                  </span>
+                  <span>
+                    <input type="radio" name="sidebar_bg" value="color_7" id="sidebar_bg_7">
+                    <label for="sidebar_bg_7"></label>
+                  </span>
+                  <span>
+                    <input type="radio" name="sidebar_bg" value="color_8" id="sidebar_bg_8">
+                    <label for="sidebar_bg_8"></label>
+                  </span>
+				</li>
+			  </ul>
+			</li>
+            <!--切换主题配色-->
+          </ul>
+          
+        </div>
+      </nav>
+      
+    </header>
+    <!--End 头部信息-->
+    
+    <!--页面主要内容-->
+    <main class="layout-content">
+      
+      <div class="container-fluid">
+        
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="card">
+              <div class="card-toolbar clearfix">
+                <form class="pull-right search-bar" method="get" th:action="@{/manager/searchrepair}" role="form">
+                  <div class="input-group">
+                    <spa>
+                      <input type="text" class="form-control" th:value="${keyword} == null ? '' : ${keyword}" name="keyword" placeholder="请输入用户名字">
+                    </spa>
+                    <span>
+                      <button type="submit" class="btn btn-w-md btn-round btn-info" style="float: right"><i class="mdi mdi-plus"></i>查询</button>
+                    </span>
+                  </div>
+                </form>
+              </div>
+              <div class="card-body">
+                
+                <div class="table-responsive">
+                  <table class="table table-bordered">
+                    <thead>
+                      <tr>
+                        <th>编号</th>
+                        <th>报修单Id</th>
+                        <th>报修人</th>
+                        <th>报修人联系电话</th>
+                        <th>报修内容</th>
+                        <th>邮箱</th>
+                        <th>报修状态</th>
+                        <th>处理人</th>
+                        <th>处理人联系方式</th>
+                        <th>备注</th>
+                        <th>操作</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr th:each="repair, stat:${repairs}">
+                        <td th:text="${stat.count}">1</td>
+                        <td th:text="${repair.repairId}"></td>
+                        <td th:text="${repair.repairName}"></td>
+                        <td th:text="${repair.phoneNumber}"></td>
+                        <td th:text="${repair.repairContext}"></td>
+                        <td th:text="${repair.email}"></td>
+                        <td th:text="${repair.repairStatus}"></td>
+                        <td th:text="${repair.staffName}"></td>
+                        <td th:text="${repair.staffPhoneNumber}"></td>
+                        <td th:text="${repair.remark}"></td>
+                        <td>
+                          <div class="btn-group">
+                            <a th:if="${repair.staffPhoneNumber} == null" class="btn btn-w-md btn-yellow btn-round" th:href="@{/manager/editrepair(id=${repair.repairId})}" title="选择处理人" data-toggle="tooltip">选择处理人</a>
+                            <a th:if="${repair.repairStatus != '报修单处理完成' and repair.staffPhoneNumber != null}" class="btn btn-w-md btn-success btn-round" th:href="@{/manager/repairstatus(id=${repair.repairId})}" title="完成" data-toggle="tooltip" >处理完成</a>
+                          </div>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+        </div>
+        
+      </div>
+      
+    </main>
+    <!--End 页面主要内容-->
+  </div>
+</div>
+
+<script th:replace="common.html :: commonscript"></script>
+
+<script type="text/javascript">
+$(function(){
+    $('.search-bar .dropdown-menu a').click(function() {
+        var field = $(this).data('field') || '';
+        $('#search-field').val(field);
+        $('#search-btn').html($(this).text() + ' <span class="caret"></span>');
+    });
+});
+</script>
+</body>
+</html>

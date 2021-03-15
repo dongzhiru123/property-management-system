@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="controller-api" />
+        <module name="core" />
+        <module name="repair-service" />
+        <module name="base-service" />
+        <module name="service-api" />
+        <module name="notice-service" />
+      </profile>
+    </annotationProcessing>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="base-service" options="-parameters" />
+      <module name="controller-api" options="-parameters" />
+      <module name="core" options="-parameters" />
+      <module name="notice-service" options="-parameters" />
+      <module name="repair-service" options="-parameters" />
+      <module name="service-api" options="-parameters" />
+    </option>
+  </component>
+</project>
